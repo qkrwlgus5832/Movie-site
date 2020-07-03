@@ -4,7 +4,8 @@ function MainImage(props) { // prop을 통해서 이미지를 가져옴
 
     return (
         
-            <div style={{ background: `
+            <div style={{ background: `linear-gradient(to bottom, rgba(0,0,0,0) 39%, rgba(0,0,0,0)
+              41%, rgba(0,0,0,0.65) 100%),
             url('${props.image}'), #1c1c1c`,
                 height: '500px',
                 backgroundSize : '100%, cover',
