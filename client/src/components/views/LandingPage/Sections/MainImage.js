@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function MainImage() { // prop을 통해서 이미지를 가져옴
+function MainImage(props) { // prop을 통해서 이미지를 가져옴
+
     return (
         
-            <div>
+            <div style={{ background: `
+            url('${props.image}'), #1c1c1c`,
+                height: '500px',
+                backgroundSize : '100%, cover',
+                backgroundPosition: 'center, center',
+                width : '100%',
+                position : 'relative'
+            }}>
                 <div style = {{position : 'absolute', maxWidth:'500px', bottom:'2rem', marginLeft: '2rem'}}>
-                    <h2 style={{color:'whtie'}}> title</h2>
-                    <p style={{color: 'white', fontSize: '1rem'}}> description </p>
+                    <h2 style={{color:'white'}}> {props.title}</h2>
+                    <p style={{color: 'white', fontSize: '1rem'}}> {props.text} </p>
                 </div>
             </div>
        
