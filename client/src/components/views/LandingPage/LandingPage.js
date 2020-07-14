@@ -14,11 +14,11 @@ function LandingPage() {
         fetch(endpoint)
         .then(response => response.json()) // 리턴값을 그냥 읽을 순 없고 json 메소드를 사용해야 한다.
         .then(response => {
-            setMovies([response.results])  // Movie State에 들어가게 된다.
+            setMovies(response.results)  // Movie State에 들어가게 된다.
 
             setMainMovieImage(response.results[0])
-            console.log(response.results[0]);
-        })
+            console.log(response.results);
+        }) 
     }, [])
 
     return (
@@ -38,7 +38,7 @@ function LandingPage() {
                 <h2> Movies by latest</h2>
                 <hr/>
                 {/* Movie Grid Cards*/}
-                <Row>
+                <Row gutter={[16, 16]}>
                 {Movies && Movies.map((movie, index) => (
                     <React.Fragment key={index}>
                         <GridCards
