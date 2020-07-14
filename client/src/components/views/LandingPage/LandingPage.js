@@ -9,17 +9,28 @@ function LandingPage() {
 
     const [Movies, setMovies] = useState([])
     const [MainMovieImage, setMainMovieImage] = useState(null)
-    useEffect(() => { // api들을 가져올 때 사용
-        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-        fetch(endpoint)
-        .then(response => response.json()) // 리턴값을 그냥 읽을 순 없고 json 메소드를 사용해야 한다.
-        .then(response => {
-            setMovies(response.results)  // Movie State에 들어가게 된다.
+    const [CurrentPage, setCurrentPage] = useState(0) // useState 뒤에 값은 초기값
 
-            setMainMovieImage(response.results[0])
-            console.log(response.results);
-        }) 
+    useEffect(() => { // api들을 가져올 때 사용 앱이 로드 되지 마자,
+        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`; // endpoint를 이용해서
+        fetchMovies(endpoint); // movie들을 fetch해온다.
     }, [])
+
+    const loadMoreItems = () => {
+
+        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${CurrentPage + 1}`;
+        fetchMovies(endpoint);
+    }
+
+    const fetchMovies = (endpoint) => {
+        fetch(endpoint)
+        .then(response => response.json())  
+        .then(response => {
+            setMovies([...Movies, ...response.results])   // 원래 있던 movie리스트에 response.result를 추가
+            setMainMovieImage(response.results[0])
+            setCurrentPage(response.page)
+        }) 
+    }
 
     return (
         <div style={{width: '100%', margin: '0'}}>
@@ -53,7 +64,7 @@ function LandingPage() {
             </div>
 
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <button> Load More</button>
+                <button onClick={loadMoreItems}> Load More</button>
             
             </div>
 
