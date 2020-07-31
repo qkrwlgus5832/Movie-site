@@ -35,6 +35,7 @@ function Favorite(props) {
             .then(response => {
                 if (response.data.success){
                     setFavorited(response.data.favorited)
+                    console.log(response.data)
                 } else {
                     alert('정보를 가져오는데 실패했습니다.')
                 }
@@ -48,6 +49,7 @@ function Favorite(props) {
                 if (response.data.success){
                     setFavorited(!Favorited)
                     setFavoriteNumber(FavoriteNumber - 1)
+                    console.log(Favorited)
                 }
                 else {
                     alert('Favorie 리스트에서 지우는걸 실패하였습니다.')
@@ -56,12 +58,14 @@ function Favorite(props) {
         }  else {
             Axios.post('/api/favorite/addToFavorite', variables)
             .then (response => {
+                console.log(response.data)
                 if (response.data.success){
-                    console.log(Favorited)
+                  
                     setFavorited(!Favorited)
-
-                    setFavoriteNumber(FavoriteNumber + 1)
                     console.log(Favorited)
+                    setFavoriteNumber(FavoriteNumber + 1)
+                    
+                    
                 }
                 else {
                     alert('Favorie 리스트에서 추가하는걸 실패하였습니다.')
